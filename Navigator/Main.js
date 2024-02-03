@@ -11,7 +11,7 @@ const Main = () => {
     <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown:false}}>
             <Stack.Screen name={'PracticeReactNative'} component={PracticeReactNative}/>
-            <Stack.Screen name={'SocialPractice'} component={SocialPractice}/>
+            {/* <Stack.Screen name={'SocialPractice'} component={SocialPractice}/> */}
         </Stack.Navigator>
     </NavigationContainer>
   )

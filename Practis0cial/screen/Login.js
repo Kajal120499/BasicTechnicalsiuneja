@@ -23,7 +23,9 @@ const Login = ({navigation}) => {
             const loginData = JSON.stringify(logingetData);
             console.warn("saved",loginData)
             await AsyncStorage.setItem("data",loginData)
-            loginApiCall()
+            // loginApiCall()
+            navigation.navigate("Dashboard")
+
         }
         catch (error) {
             console.error('Error setting array in AsyncStorage:', error);
@@ -47,6 +49,7 @@ const Login = ({navigation}) => {
             isValid=false;
         }
     }
+
     const loginApiCall=()=>{
         const body=JSON.stringify({
             "emailId":mail,
@@ -61,15 +64,23 @@ const Login = ({navigation}) => {
             'Content-Type': 'application/json',
             },
         },)
-        .then(kajal=>kajal.json())
+        .then(res=>res.json())
         .then(json=>{
             setLoading(false)
             const Data = json.data
-            // console.warn("...:",Data)
+            console.warn("...:",Data)
             setDataGetData(Data)
-            // console.warn("+++:",Data11)
-            navigation.navigate("Signup")
-        }).catch(err=>{
+            // if(!json.status){
+            //     if(json.message == 'User not found!'){
+            //         setBadMail(json.message)
+            //       }else{
+            //         setBadPass(json.message)
+            //       }}
+            //  else{
+                getData()
+            //  }
+        })
+        .catch(err=>{
             console.warn(err)
             setLoading(false)
         })
@@ -90,7 +101,7 @@ const Login = ({navigation}) => {
       <CustomTextInput placeholder={'Enter Password'} value={pass} onChangeText={txt=>{setPass(txt)}} />
       
       <CustomBtn title={'Login'} onClicck={()=>{if(validate){
-        getData()
+        loginApiCall()
       }}}/>
 
       <Text style={[styles.SignupTxt,{}]} onPress={()=>{navigation.navigate("Signup")}}>Create New Account ?

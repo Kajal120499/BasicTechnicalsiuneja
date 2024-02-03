@@ -9,6 +9,10 @@ const Splash = ({navigation}) => {
             navigation.navigate("Login")
         },3000)
     },[])
+
+    const getData=()=>{
+        
+    }
   return (
     <View style={styles.container}>
         <Image source={Images.logo} style={styles.logo}/>

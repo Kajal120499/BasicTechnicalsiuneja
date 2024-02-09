@@ -1,6 +1,6 @@
-import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View,SectionList  } from 'react-native'
+import { Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View, SectionList, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { Theme_Color1, black } from '../Practis0cial/utils/Color'
+import { Theme_Color1, black, white } from '../Practis0cial/utils/Color'
 
 const FileOne = () => {
     const [name, setName] = useState('')
@@ -12,34 +12,48 @@ const FileOne = () => {
         { id: 2, name: 'Anil' }
     ]
 
+    const skill = [
+        { id: 1, name: 'Php' },
+        { id: 2, name: 'Java' },
+        { id: 3, name: 'ReactNative' },
+        { id: 4, name: 'Angular' }, 
+        { id: 5, name: 'C++' },
+    ]
+
     const user = ['Peter', 'Anil']
-    
+
     const DATA = [
         {
-          title: 'Main dishes',
-          data: ['Pizza', 'Burger', 'Risotto'],
+            title: 'Main dishes',
+            data: ['Pizza', 'Burger', 'Risotto'],
         },
         {
-          title: 'Sides',
-          data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
+            title: 'Sides',
+            data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
         },
         {
-          title: 'Drinks',
-          data: ['Water', 'Coke', 'Beer'],
+            title: 'Drinks',
+            data: ['Water', 'Coke', 'Beer'],
         },
         {
-          title: 'Desserts',
-          data: ['Cheese Cake', 'Ice Cream'],
+            title: 'Desserts',
+            data: ['Cheese Cake', 'Ice Cream'],
         },
-      ];
+    ];
+
+    const [selectedRadio, setselectedRadio] = useState(0)
+
     return (
         <ScrollView>
             <Text style={styles.name}>Topics in this file...{'\n'}{'\n'}
                 1. Get Input value {'\n'}
                 2. Form value {'\n'}
                 3. list with flatlist{'\n'}
-                4 . list with map{'\n'}
-                5. Grid</Text>
+                4. list with map{'\n'}
+                5. Grid{'\n'}
+                6. sectionList{'\n'}
+                7. component with flatlist{'\n'}
+                9. Radio Button</Text>
 
             <Text style={styles.name}>Your Name is:{name}</Text>
             <TextInput placeholder='Enter Name'
@@ -122,24 +136,91 @@ const FileOne = () => {
                 <Text style={styles.grid}>Box 15</Text>
                 <Text style={styles.grid}>Box 16</Text>
                 {
-                    user.map((item) =><Text style={styles.grid}>{item}</Text>)
+                    user.map((item) => <Text style={styles.grid}>{item}</Text>)
                 }
             </View>
 
-             {/*sectionlist*/}
-             <Text style={styles.commonHeading}>sectionList</Text>
-             <SectionList
-              sections={DATA}
-              renderItem={({item}) => (
-                <View style={{ flexDirection: 'row', marginBottom: 10, }}>
-                <Text style={styles.name}>{item}</Text>
-                </View>
-              )} 
-              renderSectionHeader={({section: {title}}) => (
-                <Text style={{fontSize:30,color:black
-                }}>{title}</Text>
-              )}/>
+            {/*sectionlist*/}
+            <Text style={styles.commonHeading}>sectionList</Text>
+            <SectionList
+                sections={DATA}
+                renderItem={({ item }) => (
+                    <View style={{ flexDirection: 'row', marginBottom: 10, }}>
+                        <Text style={styles.name}>{item}</Text>
+                    </View>
+                )}
+                renderSectionHeader={({ section: { title } }) => (
+                    <Text style={{
+                        fontSize: 30, color: black
+                    }}>{title}</Text>
+                )} />
 
+
+            {/* Radio Button */}
+            <Text style={styles.commonHeading}>Radio Button</Text>
+            <View style={{ alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                <TouchableOpacity style={{}} onPress={() => { setselectedRadio(0) }}>
+                    <View style={styles.radioWrapper}>
+                        <View style={[styles.radio,]}>
+                            <View style={[styles.radioBg, { backgroundColor: selectedRadio == 0 ? black : white }]}></View>
+                        </View>
+                        <Text style={styles.radioTxt}>Radio 1</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{}} onPress={() => { setselectedRadio(1) }}>
+                    <View style={styles.radioWrapper}>
+                        <View style={[styles.radio,]}>
+                            <View style={[styles.radioBg, { backgroundColor: selectedRadio == 1 ? black : white }]}></View>
+                        </View>
+                        <Text style={styles.radioTxt}>Radio 2</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+
+            {/* Radio Button seond way*/}
+            <Text style={styles.commonHeading}>Radio Button seond way</Text>
+            <View style={{ alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                <TouchableOpacity style={{}} onPress={() => { setselectedRadio(0) }}>
+                    <View style={styles.radioWrapper}>
+                        <View style={[styles.radio,]}>
+                            {
+                                selectedRadio == 0 ? <View style={[styles.radioBg]}></View> : null
+                            }
+                        </View>
+                        <Text style={styles.radioTxt}>Radio 1</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{}} onPress={() => { setselectedRadio(1) }}>
+                    <View style={styles.radioWrapper}>
+                        <View style={[styles.radio,]}>
+                            {
+                                selectedRadio == 1 ? <View style={[styles.radioBg]}></View> : null
+                            }
+                        </View>
+                        <Text style={styles.radioTxt}>Radio 2</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+
+            {/*Dynamic Radio Button*/}
+            <Text style={styles.commonHeading}>Dynamic Radio Button</Text>
+            {
+                skill.map((item,index)=>
+                    <TouchableOpacity key={index} style={{}} onPress={() => {setselectedRadio(item.id)}}>
+                    <View style={styles.radioWrapper}>
+                    <View style={[styles.radio,]}>
+                            {
+                                selectedRadio == item.id ? <View style={[styles.radioBg]}></View> : null
+                            }
+                        </View>
+                        <Text style={styles.radioTxt}>{item.name}</Text>
+                    </View>
+                </TouchableOpacity>
+                )
+            }
+            
             {/*Component with Flatlist*/}
             <Text style={styles.commonHeading}>Component with Flatlist</Text>
             <FlatList data={users} renderItem={({ item }) =>
@@ -149,31 +230,29 @@ const FileOne = () => {
                 </>
             } />
 
-           
-            
 
         </ScrollView>
     )
 }
 
-       const Data = ({ item }) => {
-       return (
-        <View style={{ flexDirection: 'row', borderColor: 'red', borderWidth: 2, marginBottom: 10, }}>
-            <Text style={{ flex: 1, margin: 2, color: 'orange', backgroundColor: 'green' }}>{item.name}</Text>
-            <Text style={{ flex: 1, margin: 2, color: 'orange' }}>{item.id}</Text>
-        </View>
-      )
-       }
-
-      const Data12 = (props) => {
-      const item = props.item
-       return (
+const Data = ({ item }) => {
+    return (
         <View style={{ flexDirection: 'row', borderColor: 'red', borderWidth: 2, marginBottom: 10, }}>
             <Text style={{ flex: 1, margin: 2, color: 'orange', backgroundColor: 'green' }}>{item.name}</Text>
             <Text style={{ flex: 1, margin: 2, color: 'orange' }}>{item.id}</Text>
         </View>
     )
-      }
+}
+
+const Data12 = (props) => {
+    const item = props.item
+    return (
+        <View style={{ flexDirection: 'row', borderColor: 'red', borderWidth: 2, marginBottom: 10, }}>
+            <Text style={{ flex: 1, margin: 2, color: 'orange', backgroundColor: 'green' }}>{item.name}</Text>
+            <Text style={{ flex: 1, margin: 2, color: 'orange' }}>{item.id}</Text>
+        </View>
+    )
+}
 export default FileOne
 
 const styles = StyleSheet.create({
@@ -203,5 +282,28 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 10,
         textDecorationLine: 'underline'
+    },
+    radio: {
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        borderColor: "#000",
+        borderWidth: 2,
+        margin: 10
+    },
+    radioTxt: {
+        color: "red",
+        marginLeft: 20
+    },
+    radioWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    radioBg: {
+        width: 20,
+        height: 20,
+        backgroundColor: black,
+        borderRadius: 10,
+        margin: 3
     }
 })

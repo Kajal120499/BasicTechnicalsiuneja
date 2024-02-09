@@ -6,6 +6,7 @@ import Login from '../Practis0cial/screen/Login'
 import Splash from '../Practis0cial/screen/Splash'
 import Signup from '../Practis0cial/screen/Signup'
 import Dashboard from '../Practis0cial/screen/Dashboard'
+import AddPost from '../Practis0cial/screen/AddPost'
 
 const SocialPractice = () => {
     const Stack = createNativeStackNavigator()
@@ -15,6 +16,8 @@ const SocialPractice = () => {
             <Stack.Screen name={'Login'} component={Login}/>
             <Stack.Screen name={'Signup'} component={Signup}/>
             <Stack.Screen name={'Dashboard'} component={Dashboard}/>
+            <Stack.Screen name={'AddPost'} component={AddPost} options={{headerShown:true}}/>
+
         </Stack.Navigator>
   )
 }

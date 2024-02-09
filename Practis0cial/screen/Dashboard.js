@@ -6,21 +6,21 @@ import Home from '../tab/Home'
 import AddPost from '../tab/AddPost'
 import User from '../tab/User'
 
-const Dashboard = () => {
+const Dashboard = ({navigation}) => {
     const [selectedTab,setselectedTab]=useState(0)
 
   return (
     <View style={styles.conatiner}>
       <Text style={styles.heading}>social</Text>
-      {selectedTab==0?<Home/>:selectedTab==1?<AddPost/>:selectedTab==2?<User/>:null}
+      {selectedTab==0?<Home/>:selectedTab==1?<User/>:null}
       <View style={styles.bottomNav}>
        <TouchableOpacity onPress={()=>{setselectedTab(0)}}>
         <Image source={Images.home} style={[styles.icon,{tintColor:selectedTab==0?'green':'black'}]}/>
        </TouchableOpacity>
-       <TouchableOpacity onPress={()=>{setselectedTab(1)}}>
+       <TouchableOpacity onPress={()=>{navigation.navigate("AddPost")}}>
        <Image source={Images.add} style={[styles.icon,{tintColor:selectedTab==1?'green':'black'}]}/>
        </TouchableOpacity>
-       <TouchableOpacity onPress={()=>{setselectedTab(2)}}>
+       <TouchableOpacity onPress={()=>{setselectedTab(1)}}>
        <Image source={Images.user} style={[styles.icon,{tintColor:selectedTab==2?'green':'black'}]}/>
        </TouchableOpacity>
       </View>
